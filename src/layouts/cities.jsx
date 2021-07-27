@@ -13,13 +13,11 @@ export default function Cities() {
 
   cities.map(city=>city.value=city.id)
   cities.map(city=>city.text=city.city)
-  const options = [
-    { key: 'angular', text: 'Angular', value: 'angular' }]
 
   return ( 
     <Dropdown key={cities.id}
     placeholder='Şehirler' fluid multiple selection options={cities} 
-    />  
+    />
   )
 }
 
