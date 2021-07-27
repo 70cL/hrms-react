@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Dropdown } from "semantic-ui-react";
+import { Container, Dropdown } from "semantic-ui-react";
 import CityService from "../services/cityService";
 
 export default function Cities() {
@@ -14,10 +14,12 @@ export default function Cities() {
   cities.map(city=>city.value=city.id)
   cities.map(city=>city.text=city.city)
 
-  return ( 
+  return (
+    <Container className="position">
     <Dropdown key={cities.id}
     placeholder='Şehirler' fluid multiple selection options={cities} 
     />
+    </Container> 
   )
 }
 

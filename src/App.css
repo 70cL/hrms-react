@@ -1,3 +1,13 @@
 .App {
   text-align: center;
 }
+
+.ui.position.container{ 
+  width: 100px; 
+  display: flex;
+  flex-wrap: wrap;
+  align-content: left;
+  position: absolute;
+  left: 100px;
+  top: 200px;
+}
