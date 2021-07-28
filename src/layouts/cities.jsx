@@ -9,7 +9,7 @@ export default function Cities() {
     let cityService = new CityService();
 
     cityService.getCities().then((result) => setCities(result.data.data));
-  });
+  },[]);
 
   cities.map(city=>city.value=city.id)
   cities.map(city=>city.text=city.city)
