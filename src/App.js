@@ -1,11 +1,11 @@
 import './App.css';
-import Cities from './layouts/cities';
+import DashBoard from './layouts/DashBoard';
 import 'semantic-ui-css/semantic.min.css'
 
 function App() {
   return (
     <div className="App">
-      <Cities></Cities>
+      <DashBoard></DashBoard>
     </div>
   );
 }
