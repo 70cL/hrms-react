@@ -22,7 +22,8 @@ export default function JobAdv() {
             <Item style={{ marginTop: "1cm" }}>
               <Item.Image
                 style={{ marginLeft: "11cm" }}
-                src="https://www.thoughtco.com/thmb/r36ve3S3mJuL0fvdNbVcXRJ0SjA=/774x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/what-is-java-5b4bda1cc9e77c0037171617.jpg"
+                
+                src={job.employers.companyPhoto!=null?job.employers.companyPhoto:"https://www.cnet.com/a/img/-qQkzFVyOPEoBRS7K5kKS0GFDvk=/940x0/2020/04/16/7d6d8ed2-e10c-4f91-b2dd-74fae951c6d8/bazaart-edit-app.jpg"}
               />
               <Item.Content>
                 <Item.Header>
@@ -36,7 +37,10 @@ export default function JobAdv() {
                 <Item.Description></Item.Description>
                 <Item.Extra>
                   <Label>{job.cities.city}</Label>
-                  <Label content={job.workingType} />
+                  {job.workingType!=null?
+                  <Label content/>:
+                  <Label content={job.workingType}/>
+                  }
                 </Item.Extra>
               </Item.Content>
             </Item>
