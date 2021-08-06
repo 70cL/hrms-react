@@ -5,6 +5,10 @@ export default class JobAdvertisementServices{
         return axios.get("http://localhost:50550/api/jobadv/getAll")
     }
 
+    getById(id){
+        return axios.get("http://localhost:50550/api/jobadv/getById?id="+id)
+    }
+
     getByActive(){ //parameter
         return axios.get("http://localhost:50550/api/jobadv/active")
     }
