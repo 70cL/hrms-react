@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { Button, Checkbox, Container, Form } from "semantic-ui-react";
 import CandidateService from "../services/candidateService";
-import axios from "axios";
 
 export default function SignUp() {
   const initialValues = {
@@ -14,48 +13,48 @@ export default function SignUp() {
     birth_of_year: "",
   };
 
+  const onSubmit = (values) => {
+    console.log("form Data", values);
+  }
+
+  const validate = (values) => {
+    let errors = {};
+
+    if (!values.mail) {
+      errors.mail = "Required";
+      
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.mail))
+      errors.mail = "Invalid email format";
+
+    if (!values.password) {
+      errors.password = "Required";
+    }
+
+    if (!values.nationalidentity) {
+      errors.nationalidentity = "Required";
+    }
+
+    if (!values.first_name) {
+      errors.first_name = "Required";
+    }
+
+    if (!values.last_name) {
+      errors.last_name = "Required";
+    }
+
+    if (!values.birth_of_year) {
+      errors.birth_of_year = "Required";
+    }
+
+    return errors;
+  }
+
   const formik = useFormik({
     initialValues,
-    onSubmit: (values) => {
-      console.log("form Data", values);
-    },
-    validate: (values) => {
-      let errors = {};
-
-      if (!values.mail) {
-        errors.mail = "Required";
-      } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.mail))
-        errors.mail = "Invalid email format";
-
-      if (!values.password) {
-        errors.password = "Required";
-      }
-
-      if (!values.nationalidentity) {
-        errors.nationalidentity = "Required";
-      }
-
-      if (!values.first_name) {
-        errors.first_name = "Required";
-      }
-
-      if (!values.last_name) {
-        errors.last_name = "Required";
-      }
-
-      if (!values.birth_of_year) {
-        errors.birth_of_year = "Required";
-      }
-
-      return errors;
-    },
+    onSubmit,
+    validate,
   });
 
-  axios.post("http://localhost:50550/api/candidates/add", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(initialValues)
-    }).then(() => console.log("Aday sisteme kayıt edildi"))
   return (
     <div>
       <div>
@@ -69,6 +68,7 @@ export default function SignUp() {
                   placeholder="mail"
                   onChange={formik.handleChange}
                   value={formik.values.name}
+                  onBlur={formik.handleBlur}
                 />
                 {formik.errors.mail ? (
                   <div className="error">{formik.errors.mail}</div>
