@@ -5,7 +5,7 @@ export default class CandidateService{
         return axios.get("http://localhost:50550/api/candidates/getAll")
     }
 
-    addCandidate(){ //parameter
+    addCandidate(){ 
         return axios.post("http://localhost:50550/api/candidates/add")
     }
 }

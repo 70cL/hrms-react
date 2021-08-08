@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Button, Card, Image } from "semantic-ui-react";
+import {
+  Button,
+  Card,
+  Container,
+  Image,
+  Segment,
+  Label,
+  List,
+} from "semantic-ui-react";
 import JobAdvertisementServices from "../services/jobAdvertisement";
 
 export default function JobAdvDetail() {
@@ -16,32 +24,42 @@ export default function JobAdvDetail() {
   return (
     <div>
       <Card.Group>
-        <Card>
-          <Card.Content>
-            <Image
-              floated="right"
-              size="mini"
-              src={
-                "https://www.cnet.com/a/img/-qQkzFVyOPEoBRS7K5kKS0GFDvk=/940x0/2020/04/16/7d6d8ed2-e10c-4f91-b2dd-74fae951c6d8/bazaart-edit-app.jpg"
-              }
-            />
-            <Card.Header>{job?.employers?.companyName}</Card.Header>
-            <Card.Meta></Card.Meta>
-            <Card.Description>
-              <strong>best friends</strong>
-            </Card.Description>
-          </Card.Content>
-          <Card.Content extra>
-            <div className="ui two buttons">
-              <Button basic color="green">
-                Approve
-              </Button>
-              <Button basic color="red">
-                Decline
-              </Button>
-            </div>
-          </Card.Content>
-        </Card>
+        <Container style={{ marginTop: "1cm" }}>
+          <Card style={{ marginLeft: "11cm" }}>
+            <Card.Content>
+              <Image
+                floated="left"
+                size="tiny"
+                style={{width:"300%"}}
+                src={job.employers?.companyPhoto}
+              />
+              <Card.Header>{job.employers?.companyName}</Card.Header>
+              <Card.Meta></Card.Meta>
+              <Card.Description>
+                <Segment attached></Segment>
+                <Label>
+                  Alınacak kişi: 
+                  <Label.Detail>{job.person_need}</Label.Detail>
+                </Label>
+                <Label>
+                  Çalışma tipi: 
+                  <Label.Detail>{job.workingLocation?.working_location}</Label.Detail>
+                </Label>
+                <Label>
+                  Şehir:
+                  <Label.Detail>{job.cities?.city}</Label.Detail>
+                </Label>
+              </Card.Description>
+            </Card.Content>
+            <Card.Content extra>
+              <div className="ui two buttons">
+                <Button basic color="green">
+                  Başvuru yap
+                </Button>
+              </div>
+            </Card.Content>
+          </Card>
+        </Container>
       </Card.Group>
     </div>
   );
