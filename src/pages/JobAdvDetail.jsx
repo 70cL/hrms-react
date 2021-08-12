@@ -54,7 +54,7 @@ export default function JobAdvDetail() {
             <Card.Content extra>
               <div className="ui two buttons">
                 <Button basic color="green">
-                  Başvuru yap
+                  Başvuru yap!
                 </Button>
               </div>
             </Card.Content>
