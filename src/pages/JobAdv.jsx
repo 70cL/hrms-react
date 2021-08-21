@@ -18,7 +18,7 @@ export default function JobAdv() {
   return (
     <div>
       <Container style={{ marginTop: "1cm" }}>
-        <Item.Group divided>
+        <Item.Group relaxed>
           {jobs.map((job) => (
             <Item style={{ marginTop: "1cm" }}>
               <Item.Image

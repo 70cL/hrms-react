@@ -25,7 +25,7 @@ export default function JobAdvDetail() {
     <div>
       <Card.Group>
         <Container style={{ marginTop: "1cm" }}>
-          <Card style={{ marginLeft: "11cm" }}>
+          <Card style={{ margin : "auto"}}>
             <Card.Content>
               <Image
                 floated="left"

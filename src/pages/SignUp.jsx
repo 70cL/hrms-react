@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useFormik } from "formik";
+import { Formik, useFormik } from "formik";
 import { Button, Checkbox, Container, Form } from "semantic-ui-react";
 import CandidateService from "../services/candidateService";
+import * as Yup from "yup";
 
 export default function SignUp() {
+
   const initialValues = {
     mail: "",
     password: "",
@@ -13,16 +15,20 @@ export default function SignUp() {
     birth_of_year: "",
   };
 
-  const onSubmit = (values) => {
-    console.log("form Data", values);
-  }
+  const onSubmit = (values, { setSubmitting, resetForm }) => {
+    const candidateService = new CandidateService();
+
+    candidateService.addCandidate(values).then((result) => {
+      console.log(result.data.message)
+      formik.resetForm()
+    }).catch(error => console.log(error.data.message))
+  };
 
   const validate = (values) => {
     let errors = {};
 
     if (!values.mail) {
       errors.mail = "Required";
-      
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.mail))
       errors.mail = "Invalid email format";
 
@@ -47,12 +53,21 @@ export default function SignUp() {
     }
 
     return errors;
-  }
+  };
+
+  const validationSchema = Yup.object({
+    mail: Yup.string().email("Invalid email format").required("Required!"),
+    password: Yup.string().required("Required!"),
+    nationalidentity: Yup.string().required("Required!"),
+    first_name: Yup.string().required("Required!"),
+    last_name: Yup.string().required("Required!"),
+    birth_of_year: Yup.string().required("Required!"),
+  });
 
   const formik = useFormik({
     initialValues,
     onSubmit,
-    validate,
+    validationSchema,
   });
 
   return (
@@ -70,7 +85,7 @@ export default function SignUp() {
                   value={formik.values.name}
                   onBlur={formik.handleBlur}
                 />
-                {formik.errors.mail ? (
+                {formik.touched.mail && formik.errors.mail ? (
                   <div className="error">{formik.errors.mail}</div>
                 ) : null}
               </Form.Field>
@@ -81,8 +96,10 @@ export default function SignUp() {
                   placeholder="password"
                   onChange={formik.handleChange}
                   value={formik.values.name}
+                  onBlur={formik.handleBlur}
+                  type="password"
                 />
-                {formik.errors.password ? (
+                {formik.touched.password && formik.errors.password ? (
                   <div className="error">{formik.errors.password}</div>
                 ) : null}
               </Form.Field>
@@ -93,8 +110,9 @@ export default function SignUp() {
                   placeholder="first_name"
                   onChange={formik.handleChange}
                   value={formik.values.first_name}
+                  onBlur={formik.handleBlur}
                 />
-                {formik.errors.first_name ? (
+                {formik.touched.first_name && formik.errors.first_name ? (
                   <div className="error">{formik.errors.first_name}</div>
                 ) : null}
               </Form.Field>
@@ -105,8 +123,9 @@ export default function SignUp() {
                   placeholder="last_name"
                   onChange={formik.handleChange}
                   value={formik.values.last_name}
+                  onBlur={formik.handleBlur}
                 />
-                {formik.errors.last_name ? (
+                {formik.touched.last_name && formik.errors.last_name ? (
                   <div className="error">{formik.errors.last_name}</div>
                 ) : null}
               </Form.Field>
@@ -117,8 +136,10 @@ export default function SignUp() {
                   placeholder="nationalidentity"
                   onChange={formik.handleChange}
                   value={formik.values.nationalidentity}
+                  onBlur={formik.handleBlur}
                 />
-                {formik.errors.nationalidentity ? (
+                {formik.touched.nationalidentity &&
+                formik.errors.nationalidentity ? (
                   <div className="error">{formik.errors.nationalidentity}</div>
                 ) : null}
               </Form.Field>
@@ -129,8 +150,9 @@ export default function SignUp() {
                   placeholder="birth_of_year"
                   onChange={formik.handleChange}
                   value={formik.values.name}
+                  onBlur={formik.handleBlur}
                 />
-                {formik.errors.birth_of_year ? (
+                {formik.touched.birth_of_year && formik.errors.birth_of_year ? (
                   <div className="error">{formik.errors.birth_of_year}</div>
                 ) : null}
               </Form.Field>
