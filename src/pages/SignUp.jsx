@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Formik, useFormik } from "formik";
+import React from "react";
+import { useFormik } from "formik";
 import { Button, Checkbox, Container, Form } from "semantic-ui-react";
 import CandidateService from "../services/candidateService";
 import * as Yup from "yup";
@@ -15,13 +15,15 @@ export default function SignUp() {
     birth_of_year: "",
   };
 
-  const onSubmit = (values, { setSubmitting, resetForm }) => {
+  const onSubmit = (values) => {
     const candidateService = new CandidateService();
 
     candidateService.addCandidate(values).then((result) => {
-      console.log(result.data.message)
-      formik.resetForm()
-    }).catch(error => console.log(error.data.message))
+      console.log(result)
+      formik.resetForm({values: { mail: '', password: '', nationalidentity: '', first_name:'',last_name: '', birth_of_year: '' }})
+    }).catch(err => {
+    console.log(err)
+    formik.resetForm({values: { mail: '', password: '', nationalidentity: '', first_name:'',last_name: '', birth_of_year: '' }})})
   };
 
   const validate = (values) => {
@@ -57,7 +59,9 @@ export default function SignUp() {
 
   const validationSchema = Yup.object({
     mail: Yup.string().email("Invalid email format").required("Required!"),
-    password: Yup.string().required("Required!"),
+    password: Yup.string()
+    .required('No password provided.') 
+    .min(6, 'Password is too short - should be 6 chars minimum.'),
     nationalidentity: Yup.string().required("Required!"),
     first_name: Yup.string().required("Required!"),
     last_name: Yup.string().required("Required!"),

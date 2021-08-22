@@ -18,8 +18,8 @@ export default function HomePage() {
               <Grid.Column width={3}>
                 <Header inverted as="h4" content="About" />
                 <List link inverted>
-                  <List.Item as="a"><a target="_blank" href="https://github.com/70cL">Github</a></List.Item>
-                  <List.Item as="a"><a target="_blank" href="https://www.linkedin.com/in/ovuncgirgin/">Linkedin</a></List.Item>
+                  <List.Item as="a"><a target="_blank" rel="noreferrer" href="https://github.com/70cL">Github</a></List.Item>
+                  <List.Item as="a"><a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/ovuncgirgin/">Linkedin</a></List.Item>
                 </List>
               </Grid.Column>
               <Grid.Column width={3}>
